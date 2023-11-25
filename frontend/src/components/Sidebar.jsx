@@ -89,11 +89,6 @@ export default function Sidebar() {
                     Hapus Misi
                 </button>
             </div>
-            <div className="flex flex-row px-8">
-                <button onClick={() => setIsClicked(!isClicked)} className="hover:text-blue-600 px-6">
-                    DUAR
-                </button>
-            </div>
         </div>
     );
 }

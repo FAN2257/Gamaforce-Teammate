@@ -48,8 +48,6 @@ app.post("/save-drawing", (req, res) => {
     else{
         return res.json({message: "Berhasil memasukkan data"});
     }
-  
-   
   });
 });
 
@@ -59,7 +57,8 @@ app.get("/drawings", (req, res) => {
         console.error("Error fetching drawings:", err);
         return res.status(500).json({ error: "Internal Server Error", message: "Server Error" });
       }
-  
     res.json(rows);
   });
 });
+
+module.exports = db;

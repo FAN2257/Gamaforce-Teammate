@@ -14,7 +14,7 @@ function App() {
         <div className='flex-grow'>
           <Map />
         </div>
-      </div>
+      </div>git
     </div>
     )
 }
