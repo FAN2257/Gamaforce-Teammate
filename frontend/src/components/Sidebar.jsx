@@ -12,7 +12,7 @@ export default function Sidebar() {
     const [missionList, setMissionList] = useState(false);
 
     useEffect(() => {
-        fetch("http://localhost:3001")
+        fetch("http://localhost:3001/drawings")
             .then((response) => response.json())
             .then((dataresponse) => {
                 console.log(dataresponse);
@@ -35,7 +35,15 @@ export default function Sidebar() {
             }
         });
         if (newMission) {
-            Swal.fire(`Misi ${newMission} telah berhasil!`);
+            const response = await fetch("http://localhost:3001/drawings", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({newMission}),
+            });
+            const result = await response.json();
+            Swal.fire(`Misi ${newMission} berhasil ditambahkan!`);
         }
     }
 
@@ -50,21 +58,20 @@ export default function Sidebar() {
     }
 
     async function functionMissionList() {
-        const missionListContent = (
+        const missionContent = (
             <div>
-                <p>List of Missions:</p>
-                <ul>
-                    {data.map((row) => (
+                {data.map((row) => {
+                    return(
                         <li key={row.id}>
-                            {row.nama}
+                            {row.nama};
                         </li>
-                    ))}
-                </ul>
+                    )
+                })}
             </div>
         );
-        await Swal.fire({
+        Swal.fire({
             title: "List Misi",
-            html: missionListContent,
+            text: missionContent,
         });
     }
 
@@ -87,11 +94,6 @@ export default function Sidebar() {
                 <img src={hapus} width={16}></img>
                 <button onClick={() => { setMissionDelete(!missionDelete); funtionMissionDelete(); }} className="hover:text-blue-600 px-6">
                     Hapus Misi
-                </button>
-            </div>
-            <div className="flex flex-row px-8">
-                <button onClick={() => setIsClicked(!isClicked)} className="hover:text-blue-600 px-6">
-                    DUAR
                 </button>
             </div>
         </div>
