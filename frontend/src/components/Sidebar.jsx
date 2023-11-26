@@ -6,7 +6,6 @@ import hapus from "../assets/delete.png";
 
 export default function Sidebar() {
     const [data, setData] = useState([]);
-    const [isClicked, setIsClicked] = useState(false);
     const [missionDelete, setMissionDelete] = useState(false);
     const [missionAdd, setMissionAdd] = useState(false);
     const [missionList, setMissionList] = useState(false);
@@ -48,14 +47,41 @@ export default function Sidebar() {
     }
 
     async function functionMissionDelete() {
-        await Swal.fire({
-            title: "Anda yakin akan menghapus misi?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Hapus",
-            cancelButtonText: "Batal",
+        const confirmResult = await Swal.fire({
+          title: "Hapus semua misi?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Hapus",
+          cancelButtonText: "Batal",
         });
-    }
+      
+        if (confirmResult.isConfirmed) {
+          try {
+            const response = await fetch("http://localhost:3001/drawings", {
+              method: "DELETE",
+            });
+      
+            if (response.ok) {
+              Swal.fire("Semua misi berhasil dihapus!");
+              fetchData();
+            } else {
+              Swal.fire(
+                "Gagal menghapus misi.",
+                "Coba lagi nanti.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Unexpected error:", error);
+            Swal.fire(
+              "Error",
+              "Terjadi kesalahan saat menghapus misi.",
+              "error"
+            );
+          }
+        }
+      }
+      
 
     async function functionMissionList() {
         const data = await fetchData();
