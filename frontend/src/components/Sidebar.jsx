@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import home from "../assets/home.png";
 import add from "../assets/add.png";
 import hapus from "../assets/delete.png";
+import folder from "../assets/folder.png"
 
 export default function Sidebar() {
     const [data, setData] = useState([]);
@@ -135,8 +135,8 @@ export default function Sidebar() {
     return (
         <div className="flex flex-col text-center bg-blue-50 w-64 h-screen py-5 gap-3.5">
             <p className="font-bold">Pengaturan Misi</p>
-            <div id="home" className="flex flex-row px-8">
-                <img src={home} width={18}></img>
+            <div id="folder" className="flex flex-row px-8">
+                <img src={folder} width={18}></img>
                 <button onClick={() => { setMissionList(!missionList); functionMissionList(); }} className="hover:text-blue-600 px-5">
                     Load Misi
                 </button>
