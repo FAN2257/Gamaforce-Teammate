@@ -51,7 +51,7 @@ app.get("/drawings", (req, res) => {
         return res.status(500).json({ error: "Internal Server Error", message: "Server Error" });
       }
       else {
-        res.status(200).json({drawings: rows});
+        res.status(200).json(rows);
       }
   });
 });
