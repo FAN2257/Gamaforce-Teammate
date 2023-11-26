@@ -55,7 +55,7 @@ function Map() {
       const geojson = layer.toGeoJSON();
 
       // Send the drawn shape to the backend
-      fetch("http://localhost:3001/save-drawing", {
+      fetch("http://localhost:3001/drawings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function Map() {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Drawing saved with ID:", row.id);
+          console.log("Drawing saved with ID:", data.id);
         })
         .catch((error) => {
           console.error("Error saving drawing:", error);
