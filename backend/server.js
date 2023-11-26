@@ -20,7 +20,7 @@ app.use(cors());
 // })
 
 db.run(
-    "CREATE TABLE IF NOT EXISTS drawings (id INTEGER PRIMARY KEY AUTOINCREMENT, geojson TEXT)",
+    "CREATE TABLE IF NOT EXISTS drawings (id INTEGER PRIMARY KEY AUTOINCREMENT, nama TEXT)",
     (err) => {
       if (err) {
         console.error("Error creating table:", err);
