@@ -53,7 +53,7 @@ app.listen(port, (err) => {
   }
 })
 
-app.delete("/drawings/delete", (req, res) => {
+app.delete("/drawings", (req, res) => {
   try {
       db.run("DELETE FROM drawings", (err) => {
           if (err) {
