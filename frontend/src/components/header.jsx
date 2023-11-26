@@ -4,7 +4,7 @@ function Header() {
     return(
         <div id='header'>
             <div className='place-items-center'>
-                <img src={header} width={180}></img>
+                 <a href='https://gamaforce.wg.ugm.ac.id/'><img src={header} width={180}></img></a>
             </div>
         </div>
     )

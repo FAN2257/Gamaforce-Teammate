@@ -47,7 +47,7 @@ export default function Sidebar() {
         }
     }
 
-    async function funtionMissionDelete() {
+    async function functionMissionDelete() {
         await Swal.fire({
             title: "Anda yakin akan menghapus misi?",
             icon: "warning",
@@ -56,40 +56,6 @@ export default function Sidebar() {
             cancelButtonText: "Batal",
         });
     }
-
-    // async function functionMissionList() {
-    //     try {
-    //         const response = await fetch('http://localhost:3001/drawings', {
-    //             method: 'GET',
-    //         });
-
-    //         const data = await response.json();
-
-    //         if (Array.isArray(data)) {
-    //             const missionContent = (
-    //                 <div>
-    //                     <ul>
-    //                         {data.map((row) => (
-    //                             <li key={row.id}>{row.nama}</li>
-    //                         ))}
-    //                     </ul>
-    //                 </div>
-    //             )
-
-    //             await Swal.fire({
-    //                 title: "List Misi",
-    //                 html: missionContent,
-    //             })
-    //         }
-    //         console.log('Data from server: ', data);
-    //         return data;
-    //     }
-    //     catch(error) {
-    //         console.error('Error from server: ', error);
-    //         alert('Terjadi kesalahan saat mengambil data dari server.');
-    //         return null;
-    //     }
-        
 
     async function functionMissionList() {
         const data = await fetchData();
@@ -118,27 +84,27 @@ export default function Sidebar() {
     }
 
     async function generateMissionList() {
-        if(Array.isArray(data)) {
+        if (Array.isArray(data)) {
             const missionListContainer = document.createElement('div');
             missionListContainer.innerHTML = '';
-
+    
             const ulElement = document.createElement('ul');
             data.forEach((mission) => {
                 const liElement = document.createElement('li');
-                liElement.textContent = mission.nama || 'Nama tidak tersedia';
+                // Use the correct field name for the mission name, replace 'nama' with the actual field name
+                liElement.textContent = mission.geojson || 'Nama tidak tersedia';
                 ulElement.appendChild(liElement);
             });
             missionListContainer.appendChild(ulElement);
             const generatedHTML = missionListContainer.innerHTML;
-            console.log('Generated HTML:', generatedHTML); 
-            return `<ul>${data.map((mission) => `<li>${mission.nama}</li>`).join('')}</ul>`;
-        }
-        else {
+            console.log('Generated HTML:', generatedHTML);
+            return `<ul>${data.map((mission) => `<li>${mission.geojson}</li>`).join('')}</ul>`;
+        } else {
             console.error('Data dari server bukan array: ', data);
             return 'Terdapat kesalahan format data';
         }
     }
-
+    
 
     return (
         <div className="flex flex-col text-center bg-blue-50 w-64 h-screen py-5 gap-3.5">
@@ -157,7 +123,7 @@ export default function Sidebar() {
             </div>
             <div id="hapus" className="flex flex-row px-8">
                 <img src={hapus} width={16}></img>
-                <button onClick={() => { setMissionDelete(!missionDelete); funtionMissionDelete(); }} className="hover:text-blue-600 px-6">
+                <button onClick={() => { setMissionDelete(!missionDelete); functionMissionDelete(); }} className="hover:text-blue-600 px-6">
                     Hapus Misi
                 </button>
             </div>
